@@ -235,6 +235,16 @@ st.write("""
          Although each type of pollutant has a different pattern of increase and decrease, there are similarities in the peak data in the same period, namely between 01-2014 to 07-2014. Although the trends of several types of pollutants are similar, the amount of pollutants detected in µg/m³ varies, with CO pollutants having the highest concentration.
          """)
 
+st.header("Interactive Analysis of Temperature and PM10")
+start_month = st.selectbox("Select Start Month", options=df_monthly.index, index=0)
+end_month = st.selectbox("Select End Month", options=df_monthly.index, index=len(df_monthly) - 1)
+filtered = df_monthly[(df_monthly.index >= start_month) & (df_monthly.index <= end_month)]
+st.line_chart(filtered[["TEMP", "PM10"]])
+
+# Convert selections to datetime for filtering
+start_date = pd.to_datetime(start_month)
+end_date = pd.to_datetime(end_month)
+
 #Footer
 st.markdown("---")
 st.markdown(
